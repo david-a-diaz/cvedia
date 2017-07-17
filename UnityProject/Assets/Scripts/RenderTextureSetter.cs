@@ -15,7 +15,8 @@ public class RenderTextureSetter : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void OnPreRender () 
+    {
+        //GameObject.FindGameObjectsWithTag("TNE");
 	}
 }
