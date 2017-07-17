@@ -2,16 +2,16 @@
 
 public class MaterialSwap : MonoBehaviour
 {
-    private Material m_originalMaterial;
+    private Material[] m_originalMaterials;
 
     void Awake()
     {
-        m_originalMaterial = GetComponent<Renderer>().material;
+        m_originalMaterials = GetComponent<Renderer>().materials;
     }
 
     public void RestoreMaterial()
     {
-        GetComponent<Renderer>().material = m_originalMaterial;
+        GetComponent<Renderer>().materials = m_originalMaterials;
     }
 }
 

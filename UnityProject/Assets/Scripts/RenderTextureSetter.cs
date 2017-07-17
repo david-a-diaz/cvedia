@@ -44,7 +44,7 @@ public class RenderTextureSetter : MonoBehaviour
                 }
 
                 m_objectsWithMaterialChange[_objects[i].GetInstanceID()] = _objects[i].GetComponent<MaterialSwap>();
-                renderer.material = m_materialRegistry.GetMaterial(_material, renderer);
+                renderer.materials = m_materialRegistry.GetMaterial(_material, renderer);
             }
         }
     }
