@@ -48,10 +48,10 @@ Shader "Custom/EM" {
 
 			//Night
 			float3 fromPixelToCamera = normalize(IN.world - _WorldSpaceCameraPos);
-			float night = pixelIntensity * clamp(dot(fromPixelToCamera, IN.normal), 0, 1);
+			float night = 0.35 + pixelIntensity + clamp(dot(fromPixelToCamera, IN.normal), 0, 1);
 
 			//EM
-			float em = pixelIntensity;
+			float em = 5 * pixelIntensity;
 
 			// Metallic and smoothness come from slider variables
 			o.Albedo = half3(thermal, night, em);

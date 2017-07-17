@@ -44,11 +44,11 @@ Shader "Custom/Thermal" {
 			float pixelIntensity = albedo.r + albedo.g + albedo.b;
 
 			//Thermal
-			float thermal = pixelIntensity;
+			float thermal = 5 * pixelIntensity;
 
 			//Night
 			float3 fromPixelToCamera = normalize(IN.world - _WorldSpaceCameraPos);
-			float night = pixelIntensity * clamp(dot(fromPixelToCamera, IN.normal), 0, 1);
+			float night = 0.35 + pixelIntensity + clamp(dot(fromPixelToCamera, IN.normal), 0, 1);
 
 			//EM
 			float em = 0;
