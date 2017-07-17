@@ -1,13 +1,12 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
 
-Shader "Custom/TNE" {
+Shader "Custom/EM" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
-		_ThermalAndEM ("ThermalAndEM", Range(0,1)) = 0.0
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -44,17 +43,15 @@ Shader "Custom/TNE" {
 			fixed4 albedo = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			float pixelIntensity = albedo.r + albedo.g + albedo.b;
 
-			fixed4 tne = tex2D (_ThermalAndEM, IN.uv_MainTex);
-
 			//Thermal
-			float thermal = pixelIntensity / 3 * tne.r;
+			float thermal = 0;
 
 			//Night
 			float3 fromPixelToCamera = normalize(IN.world - _WorldSpaceCameraPos);
 			float night = pixelIntensity * clamp(dot(fromPixelToCamera, IN.normal), 0, 1);
 
 			//EM
-			float em = pixelIntensity / 3 * tne.z;
+			float em = pixelIntensity;
 
 			// Metallic and smoothness come from slider variables
 			o.Albedo = half3(thermal, night, em);
